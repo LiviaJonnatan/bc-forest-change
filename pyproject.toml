@@ -1,0 +1,33 @@
+[project]
+name = "bcchange"
+version = "0.1.0"
+description = "Forest change detection for BC's South Coast from Sentinel-2 imagery and BC Data Catalogue labels"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy", "pandas", "pyarrow", "pyyaml", "typer",
+  "geopandas>=1.0", "shapely>=2.0", "pyproj", "rasterio>=1.3",
+  "xarray", "rioxarray",
+]
+
+[project.optional-dependencies]
+fetch = ["bcdata", "pystac-client", "stackstac", "planetary-computer", "dask[array]"]
+model = ["torch", "segmentation-models-pytorch", "scikit-learn", "matplotlib"]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+bcchange = "bcchange.cli:app"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = ["E501", "B008"]   # B008: typer.Option in defaults is idiomatic

@@ -1,0 +1,44 @@
+# Study-area and pipeline configuration. Everything downstream reads this file.
+aoi:
+  region_name: "South Coast Natural Resource Region"   # ADM_NR_REGIONS_SP.REGION_NAME
+  # Start smaller: set district_name to "Sunshine Coast Natural Resource District"
+  district_name: null
+crs: "EPSG:3005"           # BC Albers; all layers reprojected to this
+resolution_m: 10
+
+years: [2018, 2019, 2020, 2021, 2022, 2023, 2024]
+season: { start: "06-01", end: "09-30" }
+max_scene_cloud_pct: 40
+
+imagery:
+  stac_url: "https://planetarycomputer.microsoft.com/api/stac/v1"
+  collection: "sentinel-2-l2a"
+  bands: ["B02", "B03", "B04", "B08", "B11", "B12", "SCL"]
+
+layers:                     # BC Geographic Warehouse object names (verify with `bcdata list`)
+  regions:   "WHSE_ADMIN_BOUNDARIES.ADM_NR_REGIONS_SP"
+  districts: "WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP"
+  cutblocks: "WHSE_FOREST_VEGETATION.VEG_CONSOLIDATED_CUT_BLOCKS_SP"
+  fires:     "WHSE_LAND_AND_NATURAL_RESOURCE.PROT_HISTORICAL_FIRE_POLYS_SP"
+  vri:       "WHSE_FOREST_VEGETATION.VEG_COMP_LYR_R1_POLY"
+  streams:   "WHSE_BASEMAPPING.FWA_STREAM_NETWORKS_SP"
+  watersheds: "WHSE_BASEMAPPING.FWA_ASSESSMENT_WATERSHEDS_POLY"
+  ogma:      "WHSE_LAND_USE_PLANNING.RMP_OGMA_LEGAL_CURRENT_SVW"
+  parks:     "WHSE_TANTALIS.TA_PARK_ECORES_PA_SVW"
+
+labels:
+  classes: { no_change: 0, harvest: 1, fire: 2 }
+  min_polygon_ha: 0.5
+  riparian_buffer_m: 30
+
+tiles:
+  size_px: 256
+  stride_px: 256
+  min_forest_frac: 0.2      # drop chips that are mostly water/alpine/urban
+  split: { train: 0.7, val: 0.15, test: 0.15 }   # by spatial block (watershed), not by chip
+
+paths:
+  raw: "data/raw"
+  interim: "data/interim"
+  processed: "data/processed"
+  outputs: "outputs"

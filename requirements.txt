@@ -1,0 +1,25 @@
+numpy
+pandas
+pyarrow
+pyyaml
+typer
+geopandas>=1.0
+shapely>=2.0
+pyproj
+rasterio>=1.3
+xarray
+rioxarray
+# stages 1-2
+bcdata
+pystac-client
+stackstac
+planetary-computer
+dask[array]
+# stage 5
+torch
+segmentation-models-pytorch
+scikit-learn
+matplotlib
+# dev
+pytest
+ruff
