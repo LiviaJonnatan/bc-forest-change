@@ -2,7 +2,7 @@
 aoi:
   region_name: "South Coast Natural Resource Region"   # ADM_NR_REGIONS_SP.REGION_NAME
   # Start smaller: set district_name to "Sunshine Coast Natural Resource District"
-  district_name: null
+  district_name: "Sunshine Coast Natural Resource District"
 crs: "EPSG:3005"           # BC Albers; all layers reprojected to this
 resolution_m: 10
 
@@ -15,9 +15,9 @@ imagery:
   collection: "sentinel-2-l2a"
   bands: ["B02", "B03", "B04", "B08", "B11", "B12", "SCL"]
 
-layers:                     # BC Geographic Warehouse object names (verify with `bcdata list`)
-  regions:   "WHSE_ADMIN_BOUNDARIES.ADM_NR_REGIONS_SP"
-  districts: "WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SP"
+layers:                     # BC Geographic Warehouse object names
+  regions:   "WHSE_ADMIN_BOUNDARIES.ADM_NR_REGIONS_SPG"
+  districts: "WHSE_ADMIN_BOUNDARIES.ADM_NR_DISTRICTS_SPG"
   cutblocks: "WHSE_FOREST_VEGETATION.VEG_CONSOLIDATED_CUT_BLOCKS_SP"
   fires:     "WHSE_LAND_AND_NATURAL_RESOURCE.PROT_HISTORICAL_FIRE_POLYS_SP"
   vri:       "WHSE_FOREST_VEGETATION.VEG_COMP_LYR_R1_POLY"
